@@ -54,7 +54,7 @@ const arrowButtons = () => {
     leftArrow.addEventListener('click', (e) => {
         e.preventDefault()
         console.log(currentPosition)
-        if (currentPosition === 0) {
+        if (currentPosition === 0 || currentPosition === '0') {
             currentPosition = 6
         }
         currentPosition = currentPosition - 1
@@ -65,10 +65,10 @@ const arrowButtons = () => {
 
     rightArrow.addEventListener('click', (e) => {
         e.preventDefault()
-        if (currentPosition === 5) {
+        if (currentPosition === 5 || currentPosition === '5') {
             currentPosition = 0
         }
-        currentPosition = currentPosition + 1
+        currentPosition++
         const translateAmount = 50 * currentPosition
         const position = translateNumber(currentPosition)
         translateImage(`-${translateAmount}vw`, position)
