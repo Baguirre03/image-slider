@@ -1,9 +1,9 @@
 const translateImage = (position, imageNumber) => {
     const imageHolder = document.querySelector('.image-holder')
-    const image = document.querySelector(`.image-${imageNumber}`)
-    image.classList.add('visible-image')
+    // const image = document.querySelector(`.image-${imageNumber}`)
+    // image.classList.add('visible-image')
 
-    const positionInImageHolder = position
+    // const positionInImageHolder = position
     imageHolder.style.transform = `translate(${position})`
     imageHolder.style.transition = 'all 1s'
 }
@@ -25,6 +25,8 @@ const translateNumber = (number) => {
     }
 }
 
+let currentPosition = 0
+
 const createButtons = () => {
     const parentDiv = document.querySelector('.buttons')
 
@@ -41,11 +43,39 @@ const createButtons = () => {
 
         btn.addEventListener('click', (e) => {
             e.preventDefault()
+            currentPosition = btn.dataset.position
             const translateAmount = 50 * btn.dataset.position
             const position = translateNumber(btn.dataset.position)
             translateImage(`-${translateAmount}vw`, position)
         })
     }
 };
+
+const arrowButtons = (() => {
+    const leftArrow = document.querySelector('.left-arrow')    
+    const rightArrow = document.querySelector('.right-arrow')
+
+    leftArrow.addEventListener('click', (e) => {
+        e.preventDefault()
+        if (currentPosition === 0) {
+            currentPosition = 6
+        }
+        currentPosition = currentPosition - 1
+        const translateAmount = 50 * currentPosition
+        const position = translateNumber(currentPosition)
+        translateImage(`-${translateAmount}vw`, position)
+    })
+
+    rightArrow.addEventListener('click', (e) => {
+        e.preventDefault()
+        if (currentPosition === 6) {
+            currentPosition = 0
+        }
+        currentPosition = currentPosition + 1
+        const translateAmount = 50 * currentPosition
+        const position = translateNumber(currentPosition)
+        translateImage(`-${translateAmount}vw`, position)
+})
+})();
 
 createButtons()
