@@ -82,14 +82,13 @@ const arrowButtons = () => {
 };
 
 window.onload = function() {
+    let time = setInterval(rightArrowEvent, 5000)
     document.onmousemove = function(){
         clearInterval(time)
-        return time = setInterval(rightArrowEvent, 5000)
+        time = setInterval(rightArrowEvent, 5000)
+        return time
     }
-    let time = setInterval(rightArrowEvent, 5000)
 }
-
-
 
 createButtons()
 arrowButtons();
