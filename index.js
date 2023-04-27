@@ -47,33 +47,49 @@ const createButtons = () => {
     }
 };
 
+const leftArrowEvent = () => {
+    if (currentPosition === 0 || currentPosition === '0') {
+        currentPosition = 6
+    }
+    currentPosition--
+    const translateAmount = 50 * currentPosition
+    const position = translateNumber(currentPosition)
+    translateImage(`-${translateAmount}vw`, position)
+}
+const rightArrowEvent = () => {
+    if (currentPosition === 5 || currentPosition === '5') {
+        currentPosition = 0
+    }
+    currentPosition++
+    const translateAmount = 50 * currentPosition
+    const position = translateNumber(currentPosition)
+    translateImage(`-${translateAmount}vw`, position)
+}
+
 const arrowButtons = () => {
     const leftArrow = document.querySelector('.left-arrow')    
     const rightArrow = document.querySelector('.right-arrow')
 
     leftArrow.addEventListener('click', (e) => {
         e.preventDefault()
-        console.log(currentPosition)
-        if (currentPosition === 0 || currentPosition === '0') {
-            currentPosition = 6
-        }
-        currentPosition = currentPosition - 1
-        const translateAmount = 50 * currentPosition
-        const position = translateNumber(currentPosition)
-        translateImage(`-${translateAmount}vw`, position)
+        leftArrowEvent();
     })
 
     rightArrow.addEventListener('click', (e) => {
         e.preventDefault()
-        if (currentPosition === 5 || currentPosition === '5') {
-            currentPosition = 0
-        }
-        currentPosition++
-        const translateAmount = 50 * currentPosition
-        const position = translateNumber(currentPosition)
-        translateImage(`-${translateAmount}vw`, position)
-})
+        rightArrowEvent();
+    })
 };
+
+window.onload = function() {
+    document.onmousemove = function(){
+        clearInterval(time)
+        return time = setInterval(rightArrowEvent, 5000)
+    }
+    let time = setInterval(rightArrowEvent, 5000)
+}
+
+
 
 createButtons()
 arrowButtons();
