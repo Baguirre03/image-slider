@@ -1,9 +1,5 @@
-const translateImage = (position, imageNumber) => {
+const translateImage = (position) => {
     const imageHolder = document.querySelector('.image-holder')
-    // const image = document.querySelector(`.image-${imageNumber}`)
-    // image.classList.add('visible-image')
-
-    // const positionInImageHolder = position
     imageHolder.style.transform = `translate(${position})`
     imageHolder.style.transition = 'all 1s'
 }
@@ -51,12 +47,13 @@ const createButtons = () => {
     }
 };
 
-const arrowButtons = (() => {
+const arrowButtons = () => {
     const leftArrow = document.querySelector('.left-arrow')    
     const rightArrow = document.querySelector('.right-arrow')
 
     leftArrow.addEventListener('click', (e) => {
         e.preventDefault()
+        console.log(currentPosition)
         if (currentPosition === 0) {
             currentPosition = 6
         }
@@ -68,7 +65,7 @@ const arrowButtons = (() => {
 
     rightArrow.addEventListener('click', (e) => {
         e.preventDefault()
-        if (currentPosition === 6) {
+        if (currentPosition === 5) {
             currentPosition = 0
         }
         currentPosition = currentPosition + 1
@@ -76,6 +73,7 @@ const arrowButtons = (() => {
         const position = translateNumber(currentPosition)
         translateImage(`-${translateAmount}vw`, position)
 })
-})();
+};
 
 createButtons()
+arrowButtons();
