@@ -1,24 +1,7 @@
-const translateImage = (position) => {
+const translateImage = (amount) => {
     const imageHolder = document.querySelector('.image-holder')
-    imageHolder.style.transform = `translate(${position})`
+    imageHolder.style.transform = `translate(${amount})`
     imageHolder.style.transition = 'all 1s'
-}
-
-const translateNumber = (number) => {
-    switch (number){
-    case "0":
-        return number = 'one'
-    case "1":
-        return number = 'two'
-    case "2":
-        return number = 'three'
-    case "3":
-        return number = 'four'
-    case "4":
-        return number = 'five'
-    case "5":
-        return number = 'six'
-    }
 }
 
 let currentPosition = 0
@@ -41,8 +24,7 @@ const createButtons = () => {
             e.preventDefault()
             currentPosition = btn.dataset.position
             const translateAmount = 50 * btn.dataset.position
-            const position = translateNumber(btn.dataset.position)
-            translateImage(`-${translateAmount}vw`, position)
+            translateImage(`-${translateAmount}vw`)
         })
     }
 };
@@ -53,8 +35,7 @@ const leftArrowEvent = () => {
     }
     currentPosition--
     const translateAmount = 50 * currentPosition
-    const position = translateNumber(currentPosition)
-    translateImage(`-${translateAmount}vw`, position)
+    translateImage(`-${translateAmount}vw`)
 }
 const rightArrowEvent = () => {
     if (currentPosition === 5 || currentPosition === '5') {
@@ -62,8 +43,7 @@ const rightArrowEvent = () => {
     }
     currentPosition++
     const translateAmount = 50 * currentPosition
-    const position = translateNumber(currentPosition)
-    translateImage(`-${translateAmount}vw`, position)
+    translateImage(`-${translateAmount}vw`)
 }
 
 const arrowButtons = () => {
@@ -82,10 +62,10 @@ const arrowButtons = () => {
 };
 
 window.onload = function() {
-    let time = setInterval(rightArrowEvent, 5000)
+    let time = setInterval(rightArrowEvent, 3000)
     document.onmousemove = function(){
         clearInterval(time)
-        time = setInterval(rightArrowEvent, 5000)
+        time = setInterval(rightArrowEvent, 3000)
         return time
     }
 }
